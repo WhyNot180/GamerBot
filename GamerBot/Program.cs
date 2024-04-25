@@ -9,7 +9,6 @@ namespace GamerBot
 {
     public class Program
     {
-        //private static DiscordSocketClient _client;
 
         public static Task Main() => new Program().MainAsync();
 
