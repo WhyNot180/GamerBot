@@ -31,6 +31,11 @@ namespace GamerBot
                     }))
                     .AddSingleton(X => new InteractionService(X.GetRequiredService<DiscordSocketClient>()))
                     .AddSingleton<InteractionHandler>()
+                    .AddHttpClient("steamCommunityClient", c => c.BaseAddress = new Uri(config["URIs:SteamCommunity"]))
+                    .Services
+                    .AddHttpClient("steamStoreClient", c => c.BaseAddress = new Uri(config["URIs:SteamStore"]))
+                    .Services
+                    .AddHttpClient("valveSoftwareClient", c => c.BaseAddress = new Uri(config["URIs:ValveSoftware"]))
                  )
                 .Build();
 
@@ -47,21 +52,14 @@ namespace GamerBot
             var sCommands = serviceProvider.GetRequiredService<InteractionService>();
             await serviceProvider.GetRequiredService<InteractionHandler>().InitializeAsync();
             var config = serviceProvider.GetRequiredService<IConfigurationRoot>();
-            
+
             _client.Log += Log;
             sCommands.Log += Log;
 
             _client.Ready += async () =>
             {
                 Console.WriteLine("Bot Ready!");
-                bool success = ulong.TryParse(config["testGuild"], out ulong guildID);
-                if (success)
-                {
-                    await sCommands.RegisterCommandsToGuildAsync(guildID);
-                } else
-                {
-                    Console.WriteLine("Config parse failed to find guild!");
-                }
+                await sCommands.RegisterCommandsGloballyAsync(true);
             };
 
             var token = config["Discord:Token"];
