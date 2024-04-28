@@ -9,6 +9,10 @@ namespace GamerBot.Modules
     {
         private readonly IHttpClientFactory _httpClientFactory;
 
+        /// <summary>
+        /// Implements slash commands and interactions (i.e. buttons, select menus etc.)
+        /// </summary>
+        /// <param name="httpClientFactory"></param>
         public InteractionModule(IHttpClientFactory httpClientFactory) 
         {
             _httpClientFactory = httpClientFactory;
@@ -63,12 +67,15 @@ namespace GamerBot.Modules
         }
     }
 
+    /// <summary>
+    /// The input overlay for searching steamapps
+    /// </summary>
     public class SteamModal : IModal
     {
         public string Title => "Search Steam Store";
 
         [InputLabel("Search for games on the steam store!")]
-        // Steam only allows 32 characters in a title
+        // Note: Steam only allows 32 characters in a title
         [ModalTextInput("search_query", TextInputStyle.Short, maxLength:32)]
         public string SearchQuery { get; set; }
     }

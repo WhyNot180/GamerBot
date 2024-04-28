@@ -19,6 +19,8 @@ namespace GamerBot
             IConfigurationRoot config = new ConfigurationBuilder()
                 .AddUserSecrets<Program>()
                 .Build();
+
+            // Adds dependencies
             using IHost host = Host.CreateDefaultBuilder()
                 .ConfigureServices((_, services) =>
                     services
