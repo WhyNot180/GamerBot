@@ -14,6 +14,8 @@
 GamerBot is a bot for the social media platform [Discord](https://discord.com/).
 It uses the [Steam](https://store.steampowered.com/) [internal API](https://github.com/Revadike/InternalSteamWebAPI) to get information on games and users, such as pricing and statistics.
 
+The bot is still requires major development and is not available for public use yet. Please contact @WhyNot180 if you want to invite the bot to your server.
+
 ## How to Use the Bot
 
 GamerBot uses commands to provide relevant information. You can call a command by typing
